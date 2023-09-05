@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CruzLopezProyecto v3\TCPDatos\TCPDatos.csproj" />
+    <ProjectReference Include="..\Tarea1\GUI_Cliente.csproj" />
+  </ItemGroup>
+
+</Project>
