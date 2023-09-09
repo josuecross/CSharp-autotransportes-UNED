@@ -1,18 +1,7 @@
-﻿using GUI_Servidor.src;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using GUI_Servidor.WindowsForm;
+﻿using AccesoBD;
 using Entidades.src;
+using GUI_Servidor.WindowsForm;
 using LibreriaServidor;
-using System.Threading;
-using AccesoBD;
 
 namespace GUI_Servidor
 {
@@ -22,9 +11,7 @@ namespace GUI_Servidor
         private List<Driver> conductores;
         private List<Autobus> autobuses;
         private List<Route> rutas;
-
-        
-        private Role[] roles;
+        private List<Role> roles;
         private Thread threadEstado;
         EscribirEnTextboxDelegado modificarTextotxtBitacora;
         ModoficarListBoxDelegado modificarListBoxClientes;
@@ -34,7 +21,7 @@ namespace GUI_Servidor
         private bool stopThreads;
         AccesoDatos ACdatos;
 
-        public Role[] Roles { get => roles; set => roles = value; }
+        public List<Role> Roles { get => roles; set => roles = value; }
         public List<Driver> Conductores { get => conductores; set => conductores = value; }
         public List<Terminal> Terminales { get => terminales; set => terminales = value; }
         public List<Autobus> Autobuses { get => autobuses; set => autobuses = value; }
@@ -60,7 +47,7 @@ namespace GUI_Servidor
 
             this.rutas = obtenerRutas();
 
-            this.roles = new Role[20];
+            this.roles = obtenerRoles();
 
             this.stopThreads = false;
 
@@ -129,6 +116,23 @@ namespace GUI_Servidor
         }
 
 
+        public List<Role> obtenerRoles()
+        {
+
+            List<Role> resultado = new List<Role>();
+            List<object> temporal = ACdatos.ObtenerDatos(" Select	[FEC_ROL], [TIM_HORA_SALIDA], [NUM_RUTA], [NUM_IDENTIFICACION_BUS], [NUM_CEDULA_CONDUCTOR] ",
+                                                            " From	    ROL ",
+                                                            "",
+                                                            tipoDato.Roles);
+            foreach (object objeto in temporal)
+            {
+                resultado.Add((Role)objeto);
+            }
+
+            return resultado;
+        }
+
+
 
         //Delegado, necesario para modificar controles de la interfaz gráfica desde un subproceso
         private delegate void EscribirEnTextboxDelegado(string texto);
@@ -166,7 +170,7 @@ namespace GUI_Servidor
 
         private void registrarRolesbutton_Click(object sender, EventArgs e)
         {
-            var myForm = new RegistrarRoles(this, this.roles);
+            var myForm = new RegistrarRoles(this);
             openChildForm(myForm);
             hideSubmenu();
         }
@@ -207,7 +211,7 @@ namespace GUI_Servidor
 
         private void consultarRolesbutton_Click(object sender, EventArgs e)
         {
-            consultarRoles consultarRolesForm = new consultarRoles(this, this.roles);
+            consultarRoles consultarRolesForm = new consultarRoles(this);
             openChildForm(consultarRolesForm);
             hideSubmenu();
         }

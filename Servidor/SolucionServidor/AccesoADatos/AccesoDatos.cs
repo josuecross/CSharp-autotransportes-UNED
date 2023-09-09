@@ -411,14 +411,13 @@ namespace AccesoBD
             comando.Parameters.AddWithValue("@fechRol", pRole.Date);
             comando.Parameters.AddWithValue("@HSalida", pRole.DepartureHour);
             comando.Parameters.AddWithValue("@NumRuta", pRole.Ruta.Id);
-            comando.Parameters.AddWithValue("@IDBus", pRole.Autobus.PlateNumber);
+            comando.Parameters.AddWithValue("@IDBus", pRole.Autobus.Id);
             comando.Parameters.AddWithValue("@IDConductor", pRole.Conductor.Id);
 
             connection.Open();
             try
             {
-                if (comando.ExecuteNonQuery() > 0)
-                    resultado = true;
+                if (comando.ExecuteNonQuery() > 0) resultado = true;
             }
 
             catch

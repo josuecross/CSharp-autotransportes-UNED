@@ -169,7 +169,7 @@ namespace Tarea1.WindowsForm
                         r.DepartureHour.ToString("HH:mm"),
                         r.Ruta.Id,
                         r.Autobus.Id,
-                        r.Conductor.Name + r.Conductor.Surname
+                        r.Conductor.Name + " " + r.Conductor.Surname
                     );
 
                 

@@ -37,7 +37,7 @@ namespace GUI_Servidor.WindowsForm
                     d.Name,
                     d.Surname,
                     d.SecondSurname,
-                    d.BirthDate.ToString("YYYY-MM-dd"),
+                    d.BirthDate.ToString("yyyy-MM-dd"),
                     d.Gender,
                     d.DriverSupervisor ? "Si" : "No"
                     );

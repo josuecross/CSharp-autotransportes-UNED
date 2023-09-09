@@ -1,26 +1,20 @@
-﻿using GUI_Servidor.src;
+﻿using AccesoBD;
 using Entidades.src;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using GUI_Servidor.src;
 
 namespace GUI_Servidor
 {
     public partial class RegistrarRoles : Form
     {
         Menu menu;
-        Role[] roles;
-        public RegistrarRoles(Menu _menu, Role[] _roles)
+        List<Role> roles;
+        AccesoDatos ACDatos;
+        public RegistrarRoles(Menu _menu)
         {
             InitializeComponent();
+            ACDatos = new AccesoDatos();
             this.menu = _menu;
-            this.roles = _roles;
+            this.roles = menu.Roles;
         }
 
         private void guardarbutton1_Click(object sender, EventArgs e)
@@ -37,13 +31,11 @@ namespace GUI_Servidor
 
             //verificar que la fecha elegida sea con 2 dias de antelacion;
             DateTime dateNow = DateTime.Now;
-            if(date < dateNow.AddDays(2))
+            if (date < dateNow.AddDays(2))
             {
                 MessageBox.Show("Debe elegir fechas con 2 dias de antelacion", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-
 
             // Obtener la hora de salida o una excepcion si no fueron ingresadas correctamente
             try
@@ -60,39 +52,40 @@ namespace GUI_Servidor
 
             if (Herramientas.validarDatoNumerico(ref idRuta, idRutatextBox) && Herramientas.validarDatoNumerico(ref idAutobus, idAutobustextBox))
             {
-                if(validarObjetoPorId(idRuta, idRutatextBox, ref ruta) && validarObjetoPorId(idAutobus, idAutobustextBox,ref  autobus)
-                    && validarObjetoPorId(idConductor, conductortextBox, ref conductor)){
-                    for (int i = 0; i < 20; i++)
+                if (validarObjetoPorId(idRuta, idRutatextBox, ref ruta) && validarObjetoPorId(idAutobus, idAutobustextBox, ref autobus)
+                    && validarObjetoPorId(idConductor, conductortextBox, ref conductor))
+                {
+                    foreach (Role r in this.menu.Roles)
                     {
-                        //Si el indice i contiene un rol se procede a validarla
-                        if (this.roles[i] != null)
+                        //Verifica que el autobus seleccionado no este en marcha durante 2 horas siguientes a la hora seleccionada
+                        if (r.DepartureHour.AddHours(2) > departureHour && r.Autobus.Id == autobus.Id)
                         {
-                            //Verifica que el autobus seleccionado no este en marcha durante 2 horas siguientes a la hora seleccionada
-                            if (this.roles[i].DepartureHour.AddHours(2) > departureHour && this.roles[i].Autobus.Id == autobus.Id)
-                            {
-                                MessageBox.Show("El autobus se encuentra en marcha, debe elegir otra hora", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            //Verifica que el conductor no este ocupando en otra ruta y que no sea supervisor
-                            if ((this.roles[i].Conductor.Id.Equals(conductor.Id) && this.roles[i].DepartureHour.AddHours(2) > departureHour) || conductor.DriverSupervisor)
-                            {
-                                MessageBox.Show("El conductor se encuentra en marcha o es supervisor, debe elegir otra conductor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-
-                        }
-                        //Si se alcanza un indice sin ruta se procede a cargar el rol
-                        if (this.roles[i] == null)
-                        {
-                            this.roles[i] = new Role(date, departureHour, ruta, autobus, conductor);
-                            MessageBox.Show("Rol agregado correctamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            clearFields();
+                            MessageBox.Show("El autobus se encuentra en marcha, debe elegir otra hora", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
-                        
+                        //Verifica que el conductor no este ocupando en otra ruta y que no sea supervisor
+                        if ((r.Conductor.Id.Equals(conductor.Id) && r.DepartureHour.AddHours(2) > departureHour) || conductor.DriverSupervisor)
+                        {
+                            MessageBox.Show("El conductor se encuentra en marcha o es supervisor, debe elegir otra conductor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
 
                     }
 
+                    Role role = new Role(date, departureHour, ruta, autobus, conductor);
+
+                    if (ACDatos.AgregarRol(role))
+                    {
+                        this.menu.Roles.Add(role);
+                        MessageBox.Show("Rol agregado correctamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        clearFields();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo agregar el Rol", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
                 else
                 {
@@ -114,31 +107,31 @@ namespace GUI_Servidor
         {
             _textboxValidar.BackColor = Color.White;
 
-            for (int i = 0; i < 20; i++)
+            foreach (Route r in this.menu.Rutas)
             {
-                if (menu.Rutas[i].Id == id)
+                if (r.Id == id)
                 {
-                    _asignarObjeto = menu.Rutas[i];
+                    _asignarObjeto = r;
                     return true;
                 }
             }
 
             _textboxValidar.BackColor = Color.LightSalmon;
+
             return false;
         }
         private bool validarObjetoPorId(int id, TextBox _textboxValidar, ref Autobus _asignarObjeto)
         {
-            for (int i = 0; i < 20; i++)
+            foreach (Autobus a in this.menu.Autobuses)
             {
-                if (menu.Autobuses[i] != null)
+             
+                if (a.Id == id)
                 {
-                    if (menu.Autobuses[i].Id == id)
-                    {
-                        _asignarObjeto = menu.Autobuses[i];
-                        return true;
-                    }
+                    _asignarObjeto = a;
+                    return true;
                 }
-                
+            
+
             }
             _textboxValidar.BackColor = Color.LightSalmon;
             return false;
@@ -147,18 +140,17 @@ namespace GUI_Servidor
         private bool validarObjetoPorId(string id, TextBox _textboxValidar, ref Driver _asignarObjeto)
         {
             _textboxValidar.BackColor = Color.White;
-            for (int i = 0; i < 20; i++)
+            foreach (Driver d in this.menu.Conductores)
             {
-                if(menu.Conductores[i] != null)
-                {
-                    if (menu.Conductores[i].Id == id)
-                    {
-                        _asignarObjeto = menu.Conductores[i];
-                        return true;
-                    }
 
+                if (d.Id == id)
+                {
+                    _asignarObjeto = d;
+                    return true;
                 }
-                
+
+  
+
             }
             _textboxValidar.BackColor = Color.LightSalmon;
             return false;
@@ -189,12 +181,12 @@ namespace GUI_Servidor
             idRutatextBox.BackColor = Color.White;
             if (Herramientas.validarDatoNumerico(ref idAValidar, idRutatextBox))
             {
-                if(validarObjetoPorId(idAValidar, idRutatextBox, ref ruta))
+                if (validarObjetoPorId(idAValidar, idRutatextBox, ref ruta))
                 {
                     rutalabel.ForeColor = Color.Green;
                     rutalabel.Text = "Ruta: " + idRutatextBox.Text + " (encontrado)";
-                    terminalOrigenlabel.Text = "Origen: " + ruta.DepartureTerminal;
-                    terminalDestinolabel.Text = "Destino: " + ruta.ArriveTerminal;
+                    terminalOrigenlabel.Text = "Origen: " + ruta.DepartureTerminal.TerminalName;
+                    terminalDestinolabel.Text = "Destino: " + ruta.ArriveTerminal.TerminalName;
                     tarifalabel.Text = "Tarifa: " + ruta.Rate;
                     tipolabel.Text = "Tipo: " + ruta.Type;
                 }
@@ -209,7 +201,7 @@ namespace GUI_Servidor
                 }
 
             }
-            
+
         }
 
         private void limpiarbutton_Click(object sender, EventArgs e)
@@ -236,8 +228,8 @@ namespace GUI_Servidor
                 {
                     autobuslabel.ForeColor = Color.Red;
                     autobuslabel.Text = "Autobus: " + idAutobustextBox.Text + " (no encontrado)";
-                    placalabel.Text = "Placa: " ;
-                    marcalabel.Text = "Marca: " ;
+                    placalabel.Text = "Placa: ";
+                    marcalabel.Text = "Marca: ";
                     capacidadlabel.Text = "Capacidad: ";
                 }
 

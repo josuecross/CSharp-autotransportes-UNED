@@ -15,13 +15,13 @@ namespace GUI_Servidor.WindowsForm
     public partial class consultarRoles : Form
     {
         Menu menu;
-        Role[] roles;
+        List<Role> roles;
 
-        public consultarRoles(Menu _menu, Role[] _roles)
+        public consultarRoles(Menu _menu)
         {
             InitializeComponent();
             this.menu = _menu;
-            this.roles = _roles;    
+            this.roles = _menu.Roles;    
         }
 
 
@@ -95,20 +95,15 @@ namespace GUI_Servidor.WindowsForm
 
         private void consultarRoles_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 20; i++)
+            foreach (Role r in roles)
             {
-                //si el id corresponde a 0 no se muestra en el gridview
-                if (this.roles[i] != null)
-                {
-                    consultarRolesdataGridView.Rows.Add(
-                        roles[i].Date,
-                        roles[i].DepartureHour.ToString("HH:mm"),
-                        roles[i].Ruta.Id,
-                        roles[i].Autobus.Id,
-                        roles[i].Conductor.Name + roles[i].Conductor.Surname
-                    );
-
-                }
+                consultarRolesdataGridView.Rows.Add(
+                        r.Date,
+                        r.DepartureHour.ToString("HH:mm"),
+                        r.Ruta.Id,
+                        r.Autobus.Id,
+                        r.Conductor.Name + " " + r.Conductor.Surname
+                    ); 
             }
         }
 

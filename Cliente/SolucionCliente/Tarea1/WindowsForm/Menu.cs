@@ -1,17 +1,6 @@
-﻿using GUI_Cliente.src;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Tarea1.WindowsForm;
-using Entidades.src;
+﻿using Entidades.src;
 using LibreriaCliente;
-using GUI_Cliente;
+using Tarea1.WindowsForm;
 using TCPDatos;
 
 namespace Tarea1
@@ -92,35 +81,7 @@ namespace Tarea1
         }
 
 
-        //Evento de click para el boton que muestra el formulario de registrar terminales
-        private void registrarTerminalesButton_Click(object sender, EventArgs e)
-        {
-            //Crea el objeto con el windows form para la ventana de registrar terminales y la muestra
-            Registrar_terminales registrarTerminalesForm = new Registrar_terminales(this, this.Terminales, cliente);
-            openChildForm(registrarTerminalesForm);
-            hideSubmenu();
-        }
-
-        private void registrarConductoresbutton_Click(object sender, EventArgs e)
-        {
-            var myForm = new Registrar_conductores(this, this.Conductores);
-            openChildForm(myForm);
-            hideSubmenu();
-        }
-
-        private void registrarAutobusesbutton_Click(object sender, EventArgs e)
-        {
-            var myForm = new Registrar_Autobuses(this, this.autobuses);
-            openChildForm(myForm);
-            hideSubmenu();
-        }
-
-        private void registrarRutasbutton_Click(object sender, EventArgs e)
-        {
-            var myForm = new RegistrarRutas(this, this.rutas, cliente);
-            openChildForm(myForm);
-            hideSubmenu();
-        }
+       
 
         private void registrarRolesbutton_Click(object sender, EventArgs e)
         {
@@ -129,13 +90,6 @@ namespace Tarea1
             hideSubmenu();
         }
 
-        private void consultarTerminalesbutton_Click(object sender, EventArgs e)
-        {
-
-            ConsultarTerminales terminalesForm = new ConsultarTerminales(this, this.terminales);
-            openChildForm(terminalesForm);
-            hideSubmenu();
-        }
 
         private void initializeAllArray()
         {
@@ -145,26 +99,8 @@ namespace Tarea1
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ConsultarConductores conductoresForm = new ConsultarConductores(this, this.conductores);
-            openChildForm(conductoresForm);
-            hideSubmenu();
-        }
+     
 
-        private void consultarAutobusesbutton_Click(object sender, EventArgs e)
-        {
-            ConsultarAutobuses consultarAutobusesForm = new ConsultarAutobuses(this, this.autobuses);
-            openChildForm(consultarAutobusesForm);
-            hideSubmenu();
-        }
-
-        private void consultarRutasbutton_Click(object sender, EventArgs e)
-        {
-            ConsultarRutas consultarRutasForm = new ConsultarRutas(this, this.rutas);
-            openChildForm(consultarRutasForm);
-            hideSubmenu();
-        }
 
         private void consultarRolesbutton_Click(object sender, EventArgs e)
         {
