@@ -8,7 +8,7 @@
 * Colecciones
 * Redes
 ## Software de Desarrollo ##
-Visual Studio Community 2022 (C#, .Net Framework 4.8 o Net 6.0), SQL Server, SQL Management Studio)
+Visual Studio Community 2022 (C#, .Net Framework 4.8 o Net 6.0), SQL Server, SQL Management Studio) 
 ## Desarrollo ##
 Debido al éxito que se ha obtenido con la segunda versión del sistema de información entregada para la empresa AUTOTRANSPORTES-UNED, usted ha sido contratado nuevamente para hacer mejoras en su sistema de información, entre las cuales se destaca que la información, sea almacenada de forma permanente en una base de datos SQL Server. A la fecha los conductores no saben cómoestará su rol, hasta que lleguen a las oficinas centrales de le empresa, y los supervisores de forma manual, tienen que estar realizando los respectivos roles. 
 Por lo anterior, se requiere incorporar nuevas funcionalidades que permitan a los conductores, conocer cuál será su rol, y los supervisores, realizar los roles correspondientes.
