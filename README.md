@@ -8,7 +8,7 @@
 * Colecciones
 * Redes
 ## Software de Desarrollo ##
-Visual Studio Community 2022 (C#, .Net Framework 4.8 o Net 6.0), SQL Server, SQL Management Studio
+Visual Studio Community 2022 (C#, .Net Framework 4.8 o Net 6.0), SQL Server, SQL Management Studio)
 ## Desarrollo ##
 Debido al éxito que se ha obtenido con la segunda versión del sistema de información entregada para la empresa AUTOTRANSPORTES-UNED, usted ha sido contratado nuevamente para hacer mejoras en su sistema de información, entre las cuales se destaca que la información, sea almacenada de forma permanente en una base de datos SQL Server. A la fecha los conductores no saben cómoestará su rol, hasta que lleguen a las oficinas centrales de le empresa, y los supervisores de forma manual, tienen que estar realizando los respectivos roles. 
 Por lo anterior, se requiere incorporar nuevas funcionalidades que permitan a los conductores, conocer cuál será su rol, y los supervisores, realizar los roles correspondientes.
@@ -16,6 +16,7 @@ El sistema para desarrollar debe estar compuesto mínimo por dos proyectos; un c
 El proyecto cliente será utilizado tanto por los conductores normales como supervisores, con el fin de verificar mis rutas o todas las rutas en el caso de los supervisores, así como crear los respectivos roles, mientras que el proyecto servidor será utilizado por un único administrador en las oficinas centrales para dar mantenimiento a las funcionalidades de Registrar Terminales, Registrar Conductores, Registrar Autobuses y Tarifas. Toda la información debe ser almacenada en una base de datos SQL Server.
 
 ![ezgif com-video-to-gif (4)](https://github.com/josuecross/dotnet-autotransportes-UNED/assets/85675115/fdb2e2a0-baf5-45da-99fe-8890a7f9b54a)
+
 
 ## El proyecto servidor debe de cumplir con lo siguiente: ##
 - Debe implementar un servidor que escuche y responda las solicitudes de red de múltiples clientes
@@ -58,6 +59,9 @@ Para un Conductor Supervisor deberá habilitar las siguientes opciones:
 - Consultar Roles
 Para un Conductor Normal:
 - Consultar Roles
+
+![registro-cliente](https://github.com/josuecross/dotnet-autotransportes-UNED/assets/85675115/714e2710-b66f-48d8-afb4-9de2ff3de780)
+
 
 ## Consideraciones técnicas ##
 Debe utilizar POO (Programación orientada a objetos) para resolver el problema.
