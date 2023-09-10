@@ -1,12 +1,12 @@
 # Autotransportes UNED #
 ## Temas de Estudio ##
-1. Tema 2 Particularidades del lenguaje C#
-2. Tema 3 Manejo de excepciones en C#
-3. Tema 4 Conceptos de Interfaz Gráfica
-4. Tema 5 Subprocesamiento múltiple
-5. Tema 6 Bases de datos y componentes ADO.NET
-6. Tema 7 Colecciones
-7. Tema 8 Redes
+* Particularidades del lenguaje C#
+* Manejo de excepciones en C#
+* Conceptos de Interfaz Gráfica
+* Subprocesamiento múltiple
+* Bases de datos y componentes ADO.NET
+* Colecciones
+* Redes
 ## Software de Desarrollo ##
 Visual Studio Community 2022 (C#, .Net Framework 4.8 o Net 6.0), SQL Server, SQL Management Studio
 ## Desarrollo ##
@@ -14,6 +14,8 @@ Debido al éxito que se ha obtenido con la segunda versión del sistema de infor
 Por lo anterior, se requiere incorporar nuevas funcionalidades que permitan a los conductores, conocer cuál será su rol, y los supervisores, realizar los roles correspondientes.
 El sistema para desarrollar debe estar compuesto mínimo por dos proyectos; un cliente y un servidor, ambos deben comunicarse a través de la red mediante el protocolo TCP. 
 El proyecto cliente será utilizado tanto por los conductores normales como supervisores, con el fin de verificar mis rutas o todas las rutas en el caso de los supervisores, así como crear los respectivos roles, mientras que el proyecto servidor será utilizado por un único administrador en las oficinas centrales para dar mantenimiento a las funcionalidades de Registrar Terminales, Registrar Conductores, Registrar Autobuses y Tarifas. Toda la información debe ser almacenada en una base de datos SQL Server.
+
+![consulta-cliente](https://github.com/josuecross/dotnet-autotransportes-UNED/assets/85675115/d9ee4266-6469-4521-a553-0ebd80c99323)
 
 ## El proyecto servidor debe de cumplir con lo siguiente: ##
 - Debe implementar un servidor que escuche y responda las solicitudes de red de múltiples clientes
@@ -37,8 +39,6 @@ El servidor debe contar con un menú principal con las siguientes opciones
 2. Registrar Conductores
 3. Registrar Autobúses
 4. Registrar Tarifas
-
-![image](https://github.com/josuecross/net-autotransportes-UNED/assets/85675115/b61f4265-015c-49e0-85c8-1251c069c3d2)
 
 
 
