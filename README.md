@@ -15,7 +15,6 @@ Por lo anterior, se requiere incorporar nuevas funcionalidades que permitan a lo
 El sistema para desarrollar debe estar compuesto mínimo por dos proyectos; un cliente y un servidor, ambos deben comunicarse a través de la red mediante el protocolo TCP. 
 El proyecto cliente será utilizado tanto por los conductores normales como supervisores, con el fin de verificar mis rutas o todas las rutas en el caso de los supervisores, así como crear los respectivos roles, mientras que el proyecto servidor será utilizado por un único administrador en las oficinas centrales para dar mantenimiento a las funcionalidades de Registrar Terminales, Registrar Conductores, Registrar Autobuses y Tarifas. Toda la información debe ser almacenada en una base de datos SQL Server.
 
-![consulta-cliente](https://github.com/josuecross/dotnet-autotransportes-UNED/assets/85675115/d9ee4266-6469-4521-a553-0ebd80c99323)
 
 ## El proyecto servidor debe de cumplir con lo siguiente: ##
 - Debe implementar un servidor que escuche y responda las solicitudes de red de múltiples clientes
@@ -40,6 +39,7 @@ El servidor debe contar con un menú principal con las siguientes opciones
 3. Registrar Autobúses
 4. Registrar Tarifas
 
+![clientes-conectados](https://github.com/josuecross/dotnet-autotransportes-UNED/assets/85675115/a6ac1956-69dc-4b16-873e-f896e5f9d214)
 
 
 ## El proyecto cliente debe cumplir con lo siguiente: ##
