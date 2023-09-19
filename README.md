@@ -64,25 +64,23 @@ Para un Conductor Normal:
 
 
 ## Consideraciones técnicas ##
-Debe utilizar POO (Programación orientada a objetos) para resolver el problema.
-- Las clases de objetos (Terminal, Conductor, Autobús, Tarifa, Roles), no deben contener lógica
+- Debe utilizar POO (Programación orientada a objetos) para resolver el problema.
+  - Las clases de objetos (Terminal, Conductor, Autobús, Tarifa, Roles), no deben contener lógica
 para solicitar información al usuario, solo debe tener la estructura de la clase y sus propiedades.
-- Las clases no deben tener métodos vacíos
-Debe implementar el manejo de excepciones
-- Si ocurre una excepción, el sistema no debe cerrarse, se debe mostrar un mensaje al usuario y
+  - Las clases no deben tener métodos vacíos
+- Debe implementar el manejo de excepciones
+  - Si ocurre una excepción, el sistema no debe cerrarse, se debe mostrar un mensaje al usuario y
 manejar la excepción de forma apropiada.
-Uso de colecciones
-- Se deben usar colecciones genéricas (List<>) cuando se requiera consultar de base de datos y
+- Uso de colecciones
+  - Se deben usar colecciones genéricas (List<>) cuando se requiera consultar de base de datos y
 retornar más de un registro.
-- Las colecciones genéricas se usan como DataSource en los controles Combobox y
+  - Las colecciones genéricas se usan como DataSource en los controles Combobox y
 DataGridView.
-- No utilizar DataSet ni DataTable.
-Interfaz de usuario
-- Debe almacenar y consultar la información en una base de datos SQL Server. No se permite otro
+  - No utilizar DataSet ni DataTable.
+- Interfaz de usuario
+  - Debe almacenar y consultar la información en una base de datos SQL Server. No se permite otro
 motor de base de datos.
-Base de Datos
-- Debe almacenar y consultar la información en una base de datos SQL Server. No se permite otro
+-Base de Datos
+  - Debe almacenar y consultar la información en una base de datos SQL Server. No se permite otro
 motor de base de datos.
-- Para la cadena de conexión use seguridad integrada de Windows.
-- El script de creación de la base de datos se publicará en la plataforma. No de be modificar
-el script de base de datos
+  - Para la cadena de conexión use seguridad integrada de Windows.
